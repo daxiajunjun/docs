@@ -10,13 +10,13 @@ from openai import AzureOpenAI
 
 # --- 配置 ---
 api_key = os.getenv("OPENAI_API_KEY")
-azure_openai_base_url = os.getenv("AZURE_OPENAI_BASE_URL")
-azure_openai_api_version = os.getenv("AZURE_OPENAI_API_VERSION")
+azure_openai_base_url = 'https://azureopenai-east-us.openai.azure.com'
+azure_openai_api_version = '2025-04-01-preview'
 
-print(api_key, azure_openai_base_url, azure_openai_api_version)
+print(api_key)
 
-if not api_key or not azure_openai_base_url or not azure_openai_api_version:
-    raise ValueError("一个或多个环境变量未设置 (OPENAI_API_KEY, AZURE_OPENAI_BASE_URL, AZURE_OPENAI_API_VERSION)")
+if not api_key:
+    raise ValueError("一个或多个环境变量未设置 (OPENAI_API_KEY)")
 
 client = AzureOpenAI(
     azure_endpoint=azure_openai_base_url,
