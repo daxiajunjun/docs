@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky"
+    "dev": "mint dev",
+    "prepare": "husky",
+    "translate": "python scripts/translate_docs.py"
   },
   "repository": {
     "type": "git",

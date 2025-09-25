@@ -6,15 +6,20 @@ on:
       - main
     paths:
       - '**.mdx'
+      - 'docs.json'
 
 jobs:
   translate:
     runs-on: ubuntu-latest
+    # 设置 GITHUB_TOKEN 的权限，以便可以推送代码
+    permissions:
+      contents: write
+      
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          # We need the full history to compare commits
+          # 我们需要完整的历史记录来比较 commits
           fetch-depth: 0
 
       - name: Set up Python
@@ -22,23 +27,43 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: pip install openai
 
       - name: Run translation script
-        run: python scripts/translate_docs.py
+        # 将 commit SHAs 和 secrets 传递给 CI 专用脚本
+        run: |
+          python scripts/translate_docs_ci.py ${{ github.event.before }} ${{ github.event.after }}
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          AZURE_OPENAI_BASE_URL: ${{ secrets.AZURE_OPENAI_BASE_URL }}
+          AZURE_OPENAI_API_VERSION: ${{ secrets.AZURE_OPENAI_API_VERSION }}
+          # 如果您想在 CI 中使用不同的模型，可以设置这个 secret
+          AZURE_OPENAI_MODEL: ${{ secrets.AZURE_OPENAI_MODEL }}
 
       - name: Commit and push changes
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add 'zh-Hans/**/*.mdx'
-          # Check if there are any changes to commit
-          if git diff --staged --quiet; then
+          # 使用 git status 检查是否有任何变更（包括未追踪的文件）
+          if ! git status --porcelain; then
             echo "No changes to commit."
           else
-            git commit -m "docs: 自动翻译文档更新 🤖"
-            git push
+            # 添加所有语言目录下的所有变更
+            # 首先从 docs.json 获取语言列表
+            LANGUAGES=$(python -c "import json; f = open('docs.json'); data = json.load(f); print(' '.join([l['language'] for l in data['navigation']['languages'] if l['language'] != 'en']))")
+            echo "Staging changes for languages: $LANGUAGES"
+            for lang in $LANGUAGES; do
+              if [ -d "$lang" ]; then
+                git add "$lang/**/*.mdx"
+              fi
+            done
+            
+            # 再次检查是否有已暂存的变更
+            if git diff --staged --quiet; then
+              echo "No staged changes to commit."
+            else
+              git commit -m "docs: 自动翻译文档更新 🤖 (CI)"
+              git push
+            fi
           fi
