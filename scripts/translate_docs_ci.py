@@ -189,6 +189,7 @@ def main():
         return
         
     print(f"识别到 {len(tasks)} 个翻译任务...")
+    print(api_key, azure_openai_base_url, azure_openai_api_version)
     
     for task in tasks:
         source_file = task['source']
