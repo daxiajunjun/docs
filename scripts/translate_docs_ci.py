@@ -151,7 +151,6 @@ def translate_and_update(original_path, old_content, new_content, target_languag
             ]
         )
         updated_translation = response.choices[0].message.content
-        print(updated_translation)
         with open(target_path, 'w', encoding='utf-8') as f:
             f.write(updated_translation)
         print(f"成功更新文件: {target_path}")

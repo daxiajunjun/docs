@@ -37,29 +37,32 @@ jobs:
           python scripts/translate_docs_ci.py ${{ github.event.before }} ${{ github.event.after }}
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      - name: Commit and push changes
+
+      - name: "Commit and push changes if any"
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          # 使用 git status 检查是否有任何变更（包括未追踪的文件）
+          
+          # 使用 git status --porcelain 检查是否有任何类型的变更（包括新文件）
           if ! git status --porcelain; then
-            echo "No changes to commit."
+            echo "No changes detected. Nothing to commit."
           else
-            # 添加所有语言目录下的所有变更
-            # 首先从 docs.json 获取语言列表
+            echo "Changes detected. Committing and pushing..."
+            
+            # 动态地从 docs.json 获取所有目标语言目录并添加到暂存区
             LANGUAGES=$(python -c "import json; f = open('docs.json'); data = json.load(f); print(' '.join([l['language'] for l in data['navigation']['languages'] if l['language'] != 'en']))")
             echo "Staging changes for languages: $LANGUAGES"
             for lang in $LANGUAGES; do
               if [ -d "$lang" ]; then
-                git add "$lang/**/*.mdx"
+                git add "$lang"
               fi
             done
             
-            # 再次检查是否有已暂存的变更
+            # 再次检查，确保确实有文件被暂存了
             if git diff --staged --quiet; then
-              echo "No staged changes to commit."
+              echo "No staged changes to commit after add."
             else
-              git commit -m "docs: 自动翻译文档更新 🤖 (CI)"
+              git commit -m "docs: 自动翻译文档更新 🤖 (CI)" -a
               git push
             fi
           fi
