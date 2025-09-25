@@ -40,30 +40,30 @@
         ]
       },
       {
-        "language": "zh-CN",
+        "language": "zh-Hans",
         "groups": [
           {
             "group": "入门",
             "pages": [
-              "zh-CN/index",
-              "zh-CN/quickstart",
-              "zh-CN/development"
+              "zh-Hans/index",
+              "zh-Hans/quickstart",
+              "zh-Hans/development"
             ]
           },
           {
             "group": "自定义",
             "pages": [
-              "zh-CN/essentials/settings",
-              "zh-CN/essentials/navigation"
+              "zh-Hans/essentials/settings",
+              "zh-Hans/essentials/navigation"
             ]
           },
           {
             "group": "内容写作",
             "pages": [
-              "zh-CN/essentials/markdown",
-              "zh-CN/essentials/code",
-              "zh-CN/essentials/images",
-              "zh-CN/essentials/reusable-snippets"
+              "zh-Hans/essentials/markdown",
+              "zh-Hans/essentials/code",
+              "zh-Hans/essentials/images",
+              "zh-Hans/essentials/reusable-snippets"
             ]
           }
         ]
