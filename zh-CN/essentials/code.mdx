@@ -1,0 +1,35 @@
+---
+title: '代码块'
+description: '显示内联代码和代码块'
+icon: 'code'
+---
+
+## 内联代码
+
+要将 `单词` 或 `短语` 表示为代码，请将其括在反引号 (`) 中。
+
+```
+要将 `单词` 或 `短语` 表示为代码，请将其括在反引号 (`) 中。
+```
+
+## 代码块
+
+通过将代码括在三个反引号中来使用[围栏代码块](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks)，并在前导的反引号后跟上代码片段的编程语言以获得语法高亮。或者，您也可以在编程语言后写入代码的名称。
+
+```java HelloWorld.java
+class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("你好，世界！");
+    }
+}
+```
+
+````md
+```java HelloWorld.java
+class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("你好，世界！");
+    }
+}
+```
+````
