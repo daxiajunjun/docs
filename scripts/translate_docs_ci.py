@@ -13,6 +13,8 @@ api_key = os.getenv("OPENAI_API_KEY")
 azure_openai_base_url = os.getenv("AZURE_OPENAI_BASE_URL")
 azure_openai_api_version = os.getenv("AZURE_OPENAI_API_VERSION")
 
+print(api_key, azure_openai_base_url, azure_openai_api_version)
+
 if not api_key or not azure_openai_base_url or not azure_openai_api_version:
     raise ValueError("一个或多个环境变量未设置 (OPENAI_API_KEY, AZURE_OPENAI_BASE_URL, AZURE_OPENAI_API_VERSION)")
 
