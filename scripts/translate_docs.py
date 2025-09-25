@@ -91,36 +91,62 @@ def get_target_languages_from_config():
         print(f"错误: 解析 {config_path} 时出错 - {e}")
         return []
 
+def filter_source_files(file_list):
+    """一个辅助函数，用于从文件列表中筛选出我们关心的源文件。"""
+    source_files = []
+    for f in file_list:
+        # 确保 f 是字符串
+        if not isinstance(f, str):
+            continue
+        if not f.endswith('.mdx'):
+            continue
+        # 修正后的过滤逻辑:
+        # 1. 文件在根目录 (不包含 '/')
+        # 2. 或文件在 'essentials/' 目录
+        if '/' not in f or f.startswith('essentials/'):
+            source_files.append(f)
+    return source_files
+
 def get_changed_files():
-    """获取上一次提交和当前提交之间变更的 .mdx 文件列表"""
+    """
+    智能检测变更的 .mdx 文件列表，适配 pre-commit 和 pre-push 场景。
+    返回一个元组 (changed_files, diff_base)，其中 diff_base 是 'HEAD' 或 'HEAD~1'。
+    """
+    # 1. 检查暂存区 (pre-commit / 手动运行场景)
     try:
-        # 获取 HEAD 和它父提交之间的差异
-        result = subprocess.run(
-            ['git', 'diff', '--name-only', 'HEAD~1', 'HEAD'],
-            check=True,
-            capture_output=True,
-            text=True
+        staged_result = subprocess.run(
+            ['git', 'diff', '--name-only', '--cached'],
+            check=True, capture_output=True, text=True
         )
-        files = result.stdout.strip().split('\n')
-        # 筛选出我们关心的源语言目录下的 mdx 文件
-        mdx_files = [
-            f for f in files if f.endswith('.mdx') and 
-            any(f.startswith(dir) for dir in SOURCE_LANGUAGE_DIRS)
-        ]
-        # 特殊处理根目录下的文件
-        final_files = []
-        for f in mdx_files:
-            # 如果文件在 essentials 目录下，路径是正确的
-            if f.startswith('essentials/'):
-                final_files.append(f)
-            # 如果是根目录下的文件，确保它不是在其他目录
-            elif '/' not in f:
-                final_files.append(f)
+        staged_files = staged_result.stdout.strip().split('\n')
+        staged_files = [f for f in staged_files if f] # 过滤掉空字符串
         
-        return final_files
+        if staged_files:
+            source_files = filter_source_files(staged_files)
+            if source_files:
+                print(f"检测到暂存区有变更 (pre-commit 模式): {source_files}")
+                return source_files, 'HEAD'
     except subprocess.CalledProcessError as e:
-        print(f"执行 git diff 时出错: {e}")
-        return []
+        print(f"检查暂存区时出错: {e}")
+
+    # 2. 如果暂存区没有，检查上一个 commit (pre-push 场景)
+    try:
+        pushed_result = subprocess.run(
+            ['git', 'diff', '--name-only', 'HEAD~1', 'HEAD'],
+            check=True, capture_output=True, text=True
+        )
+        pushed_files = pushed_result.stdout.strip().split('\n')
+        pushed_files = [f for f in pushed_files if f] # 过滤掉空字符串
+
+        if pushed_files:
+            source_files = filter_source_files(pushed_files)
+            if source_files:
+                print(f"检测到上一个 commit 有变更 (pre-push 模式): {source_files}")
+                return source_files, 'HEAD~1'
+    except subprocess.CalledProcessError as e:
+        print(f"检查上一个 commit 时出错: {e}")
+        
+    return [], None
 
 def get_file_content_from_commit(commit_hash, file_path):
     """从指定的 commit 获取文件内容"""
@@ -213,7 +239,7 @@ def main():
         return
 
     all_source_files = get_all_source_files()
-    changed_source_files = get_changed_files()
+    changed_source_files, diff_base = get_changed_files()
     
     tasks = []
     
@@ -225,7 +251,7 @@ def main():
             # 任务1：如果翻译文件不存在，则需要创建
             if not os.path.exists(target_path):
                 tasks.append({'type': 'create', 'source': source_file, 'lang': target_language})
-            # 任务2：如果源文件被修改了，则需要更新
+            # 任务2：如果源文件在检测到的变更列表中，则需要更新
             elif source_file in changed_source_files:
                 tasks.append({'type': 'update', 'source': source_file, 'lang': target_language})
 
@@ -249,7 +275,8 @@ def main():
         old_content = ""
         # 只有“更新”任务才需要获取旧的原文内容
         if task['type'] == 'update':
-            old_content = get_file_content_from_commit('HEAD~1', source_file)
+            # 根据检测到的模式，从正确的基准获取旧内容
+            old_content = get_file_content_from_commit(diff_base, source_file)
             # 如果内容没有实际变化，则跳过，节省API调用
             if old_content == new_content:
                 print(f"文件 {source_file} 内容没有实际变化，跳过更新。")
