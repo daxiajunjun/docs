@@ -31,7 +31,17 @@ LANGUAGE_NAMES = {
     # 可根据需要添加更多语言
 }
 
-# --- 脚本逻辑 (与本地版本大部分相同，但有关键区别) ---
+# --- 脚本逻辑 ---
+
+def filter_source_files(file_list):
+    """一个辅助函数，用于从文件列表中筛选出我们关心的源文件。"""
+    source_files = []
+    for f in file_list:
+        if not isinstance(f, str) or not f.endswith('.mdx'):
+            continue
+        if '/' not in f or f.startswith('essentials/'):
+            source_files.append(f)
+    return source_files
 
 def get_target_languages_from_config():
     # ... (此函数与本地版本完全相同) ...
@@ -78,15 +88,10 @@ def get_changed_files_in_ci(before_sha, after_sha):
             ['git', 'diff', '--name-only', before_sha, after_sha],
             check=True, capture_output=True, text=True
         )
-        files = result.stdout.strip().split('\n')
-        mdx_files = [f for f in files if f.endswith('.mdx') and any(f.startswith(dir) for dir in SOURCE_LANGUAGE_DIRS)]
-        final_files = []
-        for f in mdx_files:
-            if f.startswith('essentials/'):
-                final_files.append(f)
-            elif '/' not in f:
-                final_files.append(f)
-        return final_files
+        changed_files = result.stdout.strip().split('\n')
+        source_files = filter_source_files(changed_files)
+        print(f"检测到 CI 中的源文件变更: {source_files}")
+        return source_files
     except subprocess.CalledProcessError as e:
         print(f"执行 git diff 时出错: {e}")
         return []
