@@ -9,67 +9,61 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "tabs": [
+    "languages": [
       {
-        "tab": "Guides",
-        "languages": [
+        "language": "en",
+        "groups": [
           {
-            "language": "en",
-            "groups": [
-              {
-                "group": "Getting started",
-                "pages": [
-                  "index",
-                  "quickstart",
-                  "development"
-                ]
-              },
-              {
-                "group": "Customization",
-                "pages": [
-                  "essentials/settings",
-                  "essentials/navigation"
-                ]
-              },
-              {
-                "group": "Writing content",
-                "pages": [
-                  "essentials/markdown",
-                  "essentials/code",
-                  "essentials/images",
-                  "essentials/reusable-snippets"
-                ]
-              }
+            "group": "Getting started",
+            "pages": [
+              "index",
+              "quickstart",
+              "development"
             ]
           },
           {
-            "language": "zh-CN",
-            "tab": "指南",
-            "groups": [
-              {
-                "group": "入门",
-                "pages": [
-                  "zh-CN/index",
-                  "zh-CN/quickstart",
-                  "zh-CN/development"
-                ]
-              },
-              {
-                "group": "自定义",
-                "pages": [
-                  "zh-CN/essentials/settings",
-                  "zh-CN/essentials/navigation"
-                ]
-              },
-              {
-                "group": "内容写作",
-                "pages": [
-                  "zh-CN/essentials/markdown",
-                  "zh-CN/essentials/code",
-                  "zh-CN/essentials/images",
-                  "zh-CN/essentials/reusable-snippets"
-                ]
-              }
+            "group": "Customization",
+            "pages": [
+              "essentials/settings",
+              "essentials/navigation"
+            ]
+          },
+          {
+            "group": "Writing content",
+            "pages": [
+              "essentials/markdown",
+              "essentials/code",
+              "essentials/images",
+              "essentials/reusable-snippets"
+            ]
+          }
+        ]
+      },
+      {
+        "language": "zh-CN",
+        "groups": [
+          {
+            "group": "入门",
+            "pages": [
+              "zh-CN/index",
+              "zh-CN/quickstart",
+              "zh-CN/development"
+            ]
+          },
+          {
+            "group": "自定义",
+            "pages": [
+              "zh-CN/essentials/settings",
+              "zh-CN/essentials/navigation"
+            ]
+          },
+          {
+            "group": "内容写作",
+            "pages": [
+              "zh-CN/essentials/markdown",
+              "zh-CN/essentials/code",
+              "zh-CN/essentials/images",
+              "zh-CN/essentials/reusable-snippets"
             ]
           }
         ]
