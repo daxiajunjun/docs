@@ -30,15 +30,6 @@ jobs:
       - name: Install Python dependencies
         run: pip install openai
 
-      - name: "Debug: 验证环境变量"
-        run: |
-          echo "Azure Base URL: ${{ secrets.AZURE_OPENAI_BASE_URL }}"
-          echo "Azure API Version: ${{ secrets.AZURE_OPENAI_API_VERSION }}"
-          echo "API Key Length: ${{ env.KEY_LENGTH }}"
-        env:
-          # 安全地获取密钥长度，而不是打印密钥本身
-          KEY_LENGTH: ${{ secrets.OPENAI_API_KEY && 1 || 0 > 0 && shell.expr.evaluate('secrets.OPENAI_API_KEY.length') || 0 }}
-
 
       - name: Run translation script
         # 将 commit SHAs 和 secrets 传递给 CI 专用脚本
