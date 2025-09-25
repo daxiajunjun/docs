@@ -1,0 +1,35 @@
+---
+title: 'コードブロック'
+description: 'インラインコードとコードブロックを表示'
+icon: 'code'
+---
+
+## インラインコード
+
+`word` または `phrase` をコードとして示すには、バックティック（`）で囲みます。
+
+```
+`word` または `phrase` をコードとして示すには、バックティック（`）で囲みます。
+```
+
+## コードブロック
+
+コードを三つのバックティックで囲むことで [フェンデッドコードブロック](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks) を使い、先頭のバックティックの後にスニペットのプログラミング言語を書くことで構文のハイライトを取得します。オプションで、プログラミング言語の後にコードの名前を書くこともできます。
+
+```java HelloWorld.java
+class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+```
+
+````md
+```java HelloWorld.java
+class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+```
+````

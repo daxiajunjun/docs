@@ -1,0 +1,101 @@
+---
+title: "再利用可能なスニペット"
+description: "コンテンツを同期するための再利用可能なカスタムスニペット"
+icon: "recycle"
+---
+
+import SnippetIntro from '/snippets/snippet-intro.mdx';
+
+<SnippetIntro />
+
+## カスタムスニペットの作成
+
+**前提条件**: スニペットファイルは `snippets` ディレクトリ内に作成する必要があります。
+
+<Note>
+  `snippets` ディレクトリ内の任意のページはスニペットとして扱われ、単独ページにはレンダリングされません。スニペットから単独ページを作成したい場合は、スニペットを別のファイルにインポートし、コンポーネントとして呼び出します。
+</Note>
+
+### デフォルトエクスポート
+
+1. 再利用したいコンテンツをスニペットファイルに追加します。オプションで、スニペットをインポートするときにプロパティを介して埋めることができる変数を追加することもできます。
+
+```mdx snippets/my-snippet.mdx
+こんにちは世界！ これはページ間で再利用したい私のコンテンツです。 今日のキーワードは {word} です。
+```
+
+<Warning>
+  再利用したいコンテンツは、インポートが機能するために `snippets` ディレクトリ内にある必要があります。
+</Warning>
+
+2. スニペットを目的のファイルにインポートします。
+
+```mdx destination-file.mdx
+---
+title: マイタイトル
+description: マイ説明
+---
+
+import MySnippet from '/snippets/path/to/my-snippet.mdx';
+
+## ヘッダー
+
+ロレム・イプスム・ドロール・シット・アメット。
+
+<MySnippet word="バナナ" />
+```
+
+### 再利用可能な変数
+
+1. スニペットファイルから変数をエクスポートします：
+
+```mdx snippets/path/to/custom-variables.mdx
+export const myName = '私の名前';
+
+export const myObject = { fruit: 'いちご' };
+```
+
+2. 目的のファイルからスニペットをインポートし、変数を使用します：
+
+```mdx destination-file.mdx
+---
+title: マイタイトル
+description: マイ説明
+---
+
+import { myName, myObject } from '/snippets/path/to/custom-variables.mdx';
+
+こんにちは、私の名前は {myName} で、{myObject.fruit} が好きです。
+```
+
+### 再利用可能なコンポーネント
+
+1. スニペットファイル内で、渡されたプロパティを受け取るコンポーネントを作成し、矢印関数の形でコンポーネントをエクスポートします。
+
+```mdx snippets/custom-component.mdx
+export const MyComponent = ({ title }) => (
+  <div>
+    <h1>{title}</h1>
+    <p>... スニペットのコンテンツ ...</p>
+  </div>
+);
+```
+
+<Warning>
+  MDXは矢印関数の本体内ではコンパイルされません。可能な限りHTML構文を使用するか、MDXを使用する必要がある場合はデフォルトエクスポートを使用してください。
+</Warning>
+
+2. スニペットを目的のファイルにインポートし、プロパティを渡します。
+
+```mdx destination-file.mdx
+---
+title: マイタイトル
+description: マイ説明
+---
+
+import { MyComponent } from '/snippets/custom-component.mdx';
+
+ロレム・イプスム・ドロール・シット・アメット。
+
+<MyComponent title={'カスタムタイトル'} />
+```

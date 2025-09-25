@@ -1,0 +1,94 @@
+---
+title: '開発'
+description: 'ローカルで変更をプレビューしてドキュメントを更新する'
+---
+
+<Info>
+  **前提条件**:
+  - Node.jsバージョン19以上
+  - `docs.json`ファイルを含むドキュメントリポジトリ
+</Info>
+
+これらの手順に従って、あなたのオペレーティングシステムにMintlifyをインストールして実行します。
+
+<Steps>
+<Step title="Mintlify CLIをインストール">
+
+```bash
+npm i -g mint
+```
+</Step>
+
+<Step title="ローカルプレビュー">
+
+`docs.json`ファイルがあるドキュメントディレクトリに移動し、次のコマンドを実行します：
+
+```bash
+mint dev
+```
+
+ドキュメントのローカルプレビューは`http://localhost:3000`で利用可能になります。
+
+</Step>
+</Steps>
+
+## カスタムポート
+
+デフォルトでは、Mintlifyはポート3000を使用します。`--port`フラグを使用して、Mintlifyが実行されるポートをカスタマイズできます。たとえば、ポート3333でMintlifyを実行する場合は、次のコマンドを使用します：
+
+```bash
+mint dev --port 3333
+```
+
+すでに使用中のポートでMintlifyを実行しようとすると、次の利用可能なポートを使用します：
+
+```md
+ポート3000はすでに使用中です。代わりに3001を試しています。
+```
+
+## Mintlifyのバージョン
+
+各CLIリリースは、特定のバージョンのMintlifyに関連付けられています。ローカルプレビューが本番バージョンと一致しない場合は、CLIを更新してください：
+
+```bash
+npm mint update
+```
+
+## リンクの検証
+
+CLIは、ドキュメント内のリンクを検証するのに役立ちます。壊れたリンクを特定するには、次のコマンドを使用します：
+
+```bash
+mint broken-links
+```
+
+## デプロイメント
+
+デプロイメントが成功した場合、次のように表示されます：
+
+<Frame>
+  <img src="/images/checks-passed.png" alt="すべてのチェックが通過したことを示すデプロイ確認メッセージのスクリーンショット" style={{ borderRadius: '0.5rem' }} />
+</Frame>
+
+## コードフォーマット
+
+MDXを認識してフォーマットするために、IDEで拡張機能を使用することをお勧めします。VSCodeユーザーの場合は、構文のハイライトには[MDX VSCode拡張](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx)を、コードフォーマットには[Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)を検討してください。
+
+## トラブルシューティング
+
+<AccordionGroup>
+  <Accordion title='エラー: "sharp"モジュールをdarwin-arm64ランタイムでロードできませんでした'>
+
+    これは、古いバージョンのNodeが原因かもしれません。次の手順を試してください：
+    1. CLIの現在インストールされているバージョンを削除する：`npm remove -g mint`
+    2. Node v19以上にアップグレードします。
+    3. CLIを再インストールします：`npm i -g mint`
+  </Accordion>
+
+  <Accordion title="問題: 不明なエラーに遭遇しました">
+  
+    解決策：デバイスのルートに移動し、`~/.mintlify`フォルダーを削除します。その後、`mint dev`を再度実行します。
+  </Accordion>
+</AccordionGroup>
+
+最新のCLIバージョンで何が変更されたのか気になる方は、[CLIの変更ログ](https://www.npmjs.com/package/mintlify?activeTab=versions)をご覧ください。

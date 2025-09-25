@@ -1,0 +1,80 @@
+---
+title: "クイックスタート"
+description: "数分で素晴らしいドキュメントを作成を始める"
+---
+
+## 3つのステップで始めよう
+
+ドキュメントサイトをローカルで実行し、最初のカスタマイズを行います。
+
+### ステップ1: ローカル環境を設定する
+
+<AccordionGroup>
+  <Accordion icon="copy" title="ローカルにドキュメントを複製する">
+    オンボーディングプロセス中に、既存のものでない場合は、ドキュメントコンテンツを持つGitHubリポジトリを作成しました。このリポジトリへのリンクは、[ダッシュボード](https://dashboard.mintlify.com)にあります。
+    
+    変更を加えたり、ドキュメントをプレビューしたりするためにリポジトリをローカルに複製するには、GitHubのドキュメントにある[リポジトリを複製する](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)ガイドに従ってください。
+  </Accordion>
+  <Accordion icon="rectangle-terminal" title="プレビューサーバーを開始する">
+    1. Mintlify CLIをインストールします: `npm i -g mint`
+    2. ドキュメントディレクトリに移動し、次を実行します: `mint dev`
+    3. `http://localhost:3000`を開いて、ドキュメントをライブで確認します!
+    
+    <Tip>ファイルを編集するとプレビューが自動的に更新されます。</Tip>
+  </Accordion>
+</AccordionGroup>
+
+### ステップ2: 変更をデプロイする
+
+<AccordionGroup>
+  <Accordion icon="github" title="GitHubアプリをインストールする">
+    [ダッシュボード](https://dashboard.mintlify.com/settings/organization/github-app)からMintlify GitHubアプリをインストールします。
+    
+    私たちのGitHubアプリは、ドキュメントサイトへの変更を自動的にデプロイするため、デプロイメントを自分で管理する必要はありません。
+</Accordion>
+<Accordion icon="palette" title="サイト名と色を更新する">
+    最初の変更として、ドキュメントサイトの名前と色を更新しましょう。
+
+    1. エディタで`docs.json`を開きます。
+    2. `"name"`フィールドをプロジェクト名に変更します。
+    3. ブランドに合わせて`"colors"`を更新します。
+    4. 保存し、`http://localhost:3000`で変更を即座に確認します。
+
+    <Tip>プライマリーカラーを変更して、即座に変化を見てみましょう!</Tip>
+  </Accordion>
+</AccordionGroup>
+
+### ステップ3: ライブにする
+
+<Accordion icon="rocket" title="ドキュメントを公開する">
+  1. 変更をコミットしてプッシュします。
+  2. ドキュメントは瞬時に更新され、ライブになります!
+</Accordion>
+
+## 次のステップ
+
+ドキュメントが動作しているので、以下の重要な機能を探検してみてください：
+
+<CardGroup cols={2}>
+
+<Card title="コンテンツを書く" icon="pen-to-square" href="/essentials/markdown">
+  MDX構文を学び、ドキュメントの執筆を始めましょう。
+</Card>
+
+<Card title="スタイルをカスタマイズする" icon="palette" href="/essentials/settings">
+  ドキュメントをブランドに完璧に合わせましょう。
+</Card>
+
+<Card title="コード例を追加する" icon="square-code" href="/essentials/code">
+  構文ハイライト付きのコードブロックを含めることができます。
+</Card>
+
+<Card title="APIドキュメント" icon="code" href="/api-reference/introduction">
+  OpenAPI仕様からAPIドキュメントを自動生成します。
+</Card>
+
+</CardGroup>
+
+<Note>
+  **助けが必要ですか？** [完全なドキュメント](https://mintlify.com/docs)を参照するか、[コミュニティ](https://mintlify.com/community)に参加してください。
+</Note>
