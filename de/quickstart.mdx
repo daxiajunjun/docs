@@ -1,0 +1,80 @@
+---
+title: "Schnellstart"
+description: "Beginnen Sie innerhalb von Minuten mit dem Erstellen großartiger Dokumentationen"
+---
+
+## In drei Schritten starten
+
+Holen Sie sich Ihre Dokumentationsseite lokal zum Laufen und nehmen Sie Ihre erste Anpassung vor.
+
+### Schritt 1: Richten Sie Ihre lokale Umgebung ein
+
+<AccordionGroup>
+  <Accordion icon="copy" title="Klonen Sie Ihre Dokumente lokal">
+    Während des Onboarding-Prozesses haben Sie ein GitHub-Repository mit den Inhalten Ihrer Dokumentation erstellt, falls Sie noch keines hatten. Sie finden einen Link zu diesem Repository in Ihrem [Dashboard](https://dashboard.mintlify.com).
+    
+    Um das Repository lokal zu klonen, damit Sie Änderungen an Ihren Dokumenten vornehmen und live testen können, folgen Sie dem Leitfaden zum [Klonen eines Repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) in der GitHub-Dokumentation.
+  </Accordion>
+  <Accordion icon="rectangle-terminal" title="Starten Sie den Vorschau-Server">
+    1. Installieren Sie die Mintlify CLI: `npm i -g mint`
+    2. Navigieren Sie zu Ihrem Dokumentenverzeichnis und führen Sie aus: `mint dev`
+    3. Öffnen Sie `http://localhost:3000`, um Ihre Dokumentation live zu sehen!
+    
+    <Tip>Ihre Vorschau wird automatisch aktualisiert, während Sie Dateien bearbeiten.</Tip>
+  </Accordion>
+</AccordionGroup>
+
+### Schritt 2: Stellen Sie Ihre Änderungen bereit
+
+<AccordionGroup>
+  <Accordion icon="github" title="Installieren Sie unsere GitHub-App">
+    Installieren Sie die Mintlify GitHub-App von Ihrem [Dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
+    
+    Unsere GitHub-App stellt automatisch Ihre Änderungen auf Ihrer Dokumentationsseite bereit, sodass Sie die Bereitstellungen nicht selbst verwalten müssen.
+</Accordion>
+<Accordion icon="palette" title="Aktualisieren Sie den Namen und die Farben Ihrer Seite">
+    Für eine erste Änderung lassen Sie uns den Namen und die Farben Ihrer Dokumentationsseite aktualisieren.
+
+    1. Öffnen Sie `docs.json` in Ihrem Editor.
+    2. Ändern Sie das Feld `"name"` in den Namen Ihres Projekts.
+    3. Aktualisieren Sie die `"colors"`, um mit Ihrer Marke übereinzustimmen.
+    4. Speichern Sie und sehen Sie Ihre Änderungen sofort unter `http://localhost:3000`.
+
+    <Tip>Versuchen Sie, die Hauptfarbe zu ändern, um einen sofortigen Unterschied zu sehen!</Tip>
+  </Accordion>
+</AccordionGroup>
+
+### Schritt 3: Gehen Sie live
+
+<Accordion icon="rocket" title="Veröffentlichen Sie Ihre Dokumentation">
+  1. Commit und pushen Sie Ihre Änderungen.
+  2. Ihre Dokumentation wird aktualisiert und in wenigen Momenten live sein!
+</Accordion>
+
+## Nächste Schritte
+
+Jetzt, da Sie Ihre Dokumentation am Laufen haben, erkunden Sie diese wichtigen Funktionen:
+
+<CardGroup cols={2}>
+
+<Card title="Inhalte schreiben" icon="pen-to-square" href="/essentials/markdown">
+  Lernen Sie die MDX-Syntax und beginnen Sie mit dem Schreiben Ihrer Dokumentation.
+</Card>
+
+<Card title="Stil anpassen" icon="palette" href="/essentials/settings">
+  Lassen Sie Ihre Dokumentation perfekt zu Ihrer Marke passen.
+</Card>
+
+<Card title="Codebeispiele hinzufügen" icon="square-code" href="/essentials/code">
+  Fügen Sie syntax-hervorgehobene Codeblöcke ein.
+</Card>
+
+<Card title="API-Dokumentation" icon="code" href="/api-reference/introduction">
+  Generieren Sie API-Dokumentationen automatisch aus OpenAPI-Spezifikationen.
+</Card>
+
+</CardGroup>
+
+<Note>
+  **Brauchen Sie Hilfe?** Siehe unsere [vollständige Dokumentation](https://mintlify.com/docs) oder treten Sie unserer [Community](https://mintlify.com/community) bei.
+</Note>

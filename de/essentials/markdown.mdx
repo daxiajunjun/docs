@@ -1,0 +1,88 @@
+---
+Titel: 'Markdown-Syntax'
+Beschreibung: 'Text, Titel und Formatierung in standardmäßigem Markdown'
+Symbol: 'text-size'
+---
+
+## Titel
+
+Am besten für Abschnittsüberschriften verwendet.
+
+```md
+## Titel
+```
+
+### Untertitel
+
+Am besten für Unterabschnittsüberschriften verwendet.
+
+```md
+### Untertitel
+```
+
+<Tipp>
+
+Jeder **Titel** und **Untertitel** erstellt einen Anker und erscheint auch im Inhaltsverzeichnis auf der rechten Seite.
+
+</Tipp>
+
+## Textformatierung
+
+Wir unterstützen die meisten Markdown-Formatierungen. Fügen Sie einfach `**`, `_` oder `~` um den Text herum hinzu, um ihn zu formatieren.
+
+| Stil         | Wie man es schreibt   | Ergebnis           |
+| ------------ | --------------------- | ------------------ |
+| Fett         | `**fett**`           | **fett**           |
+| Kursiv       | `_kursiv_`           | _kursiv_           |
+| Durchgestrichen | `~durchgestrichen~` | ~durchgestrichen~  |
+
+Sie können diese kombinieren. Schreiben Sie zum Beispiel `**_fett und kursiv_**`, um **_fett und kursiv_** Text zu erhalten.
+
+Sie müssen HTML verwenden, um Hoch- und Tiefgestellt-Text zu schreiben. Das heißt, fügen Sie `<sup>` oder `<sub>` um Ihren Text hinzu.
+
+| Textgröße   | Wie man es schreibt          | Ergebnis                    |
+| ------------ | ---------------------------- | --------------------------- |
+| Hochgestellt | `<sup>hochgestellt</sup>`    | <sup>hochgestellt</sup>     |
+| Tiefgestellt | `<sub>tiefgestellt</sub>`    | <sub>tiefgestellt</sub>     |
+
+## Verlinkungen zu Seiten
+
+Sie können einen Link hinzufügen, indem Sie den Text in `[]()` einfügen. Sie würden `[link zu google](https://google.com)` schreiben, um [link zu google](https://google.com) zu erhalten.
+
+Links zu Seiten in Ihren Dokumenten müssen root-relativ sein. Grundsätzlich sollten Sie den gesamten Ordnerpfad einfügen. Zum Beispiel verlinkt `[link zu text](/writing-content/text)` zur Seite "Text" in unserem Komponentenabschnitt.
+
+Relative Links wie `[link zu text](../text)` öffnen langsamer, da wir diese nicht so einfach optimieren können.
+
+## Zitate
+
+### Einzelzeile
+
+Um ein Zitat zu erstellen, fügen Sie ein `>` vor einem Absatz hinzu.
+
+> Dorothy folgte ihr durch viele der schönen Räume in ihrem Schloss.
+
+```md
+> Dorothy folgte ihr durch viele der schönen Räume in ihrem Schloss.
+```
+
+### Mehrzeilig
+
+> Dorothy folgte ihr durch viele der schönen Räume in ihrem Schloss.
+>
+> Die Hexe befahl ihr, die Töpfe und Pfannen zu reinigen und den Boden zu fegen und das Feuer mit Holz zu heizen.
+
+```md
+> Dorothy folgte ihr durch viele der schönen Räume in ihrem Schloss.
+>
+> Die Hexe befahl ihr, die Töpfe und Pfannen zu reinigen und den Boden zu fegen und das Feuer mit Holz zu heizen.
+```
+
+### LaTeX
+
+Mintlify unterstützt [LaTeX](https://www.latex-project.org) über die LaTeX-Komponente.
+
+<Latex>8 x (vk x H1 - H2) = (0,1)</Latex>
+
+```md
+<Latex>8 x (vk x H1 - H2) = (0,1)</Latex>
+```

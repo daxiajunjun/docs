@@ -1,0 +1,92 @@
+# Entwicklung
+Beschreibung: Lokale Änderungen zur Aktualisierung Ihrer Dokumentation anzeigen.
+
+<Info>
+  **Voraussetzungen**:
+  - Node.js Version 19 oder höher
+  - Ein Dokumentationsrepository mit einer `docs.json`-Datei
+</Info>
+
+Befolgen Sie diese Schritte, um Mintlify auf Ihrem Betriebssystem zu installieren und auszuführen.
+
+<Steps>
+<Step title="Installieren Sie die Mintlify CLI">
+
+```bash
+npm i -g mint
+```
+</Step>
+
+<Step title="Vorschau lokal">
+
+Navigieren Sie zu Ihrem Dokumentationsverzeichnis, in dem sich Ihre `docs.json`-Datei befindet, und führen Sie den folgenden Befehl aus:
+
+```bash
+mint dev
+```
+
+Eine lokale Vorschau Ihrer Dokumentation wird unter `http://localhost:3000` verfügbar sein.
+
+</Step>
+</Steps>
+
+## Benutzerdefinierte Ports
+
+Standardmäßig verwendet Mintlify den Port 3000. Sie können den Port, auf dem Mintlify ausgeführt wird, anpassen, indem Sie das Flag `--port` verwenden. Um Mintlify beispielsweise auf Port 3333 auszuführen, verwenden Sie diesen Befehl:
+
+```bash
+mint dev --port 3333
+```
+
+Wenn Sie versuchen, Mintlify auf einem Port auszuführen, der bereits verwendet wird, wird der nächste verfügbare Port verwendet:
+
+```md
+Port 3000 wird bereits verwendet. Versuche stattdessen 3001.
+```
+
+## Mintlify-Versionen
+
+Bitte beachten Sie, dass jede CLI-Version mit einer bestimmten Version von Mintlify verknüpft ist. Wenn Ihre lokale Vorschau nicht mit der Produktionsversion übereinstimmt, aktualisieren Sie bitte die CLI:
+
+```bash
+npm mint update
+```
+
+## Überprüfen von Links
+
+Die CLI kann Ihnen beim Validieren von Links in Ihrer Dokumentation helfen. Um fehlerhafte Links zu identifizieren, verwenden Sie den folgenden Befehl:
+
+```bash
+mint broken-links
+```
+
+## Bereitstellung
+
+Wenn die Bereitstellung erfolgreich ist, sollten Sie Folgendes sehen:
+
+<Frame>
+  <img src="/images/checks-passed.png" alt="Screenshot einer Bereitstellung Bestätigungsnachricht, die besagt, dass alle Überprüfungen bestanden wurden." style={{ borderRadius: '0.5rem' }} />
+</Frame>
+
+## Codeformatierung
+
+Wir empfehlen, Erweiterungen in Ihrer IDE zu verwenden, um MDX zu erkennen und zu formatieren. Wenn Sie ein VSCode-Benutzer sind, ziehen Sie die [MDX VSCode-Erweiterung](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx) für die Syntaxhervorhebung und [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) zur Codeformatierung in Betracht.
+
+## Fehlerbehebung
+
+<AccordionGroup>
+  <Accordion title='Fehler: Konnte das "sharp"-Modul mit der darwin-arm64-Laufzeit nicht laden'>
+
+    Dies könnte an einer veralteten Version von Node liegen. Versuchen Sie Folgendes:
+    1. Entfernen Sie die aktuell installierte Version der CLI: `npm remove -g mint`
+    2. Aktualisieren Sie auf Node v19 oder höher.
+    3. Installieren Sie die CLI erneut: `npm i -g mint`
+  </Accordion>
+
+  <Accordion title="Problem: Auf einen unbekannten Fehler stoßen">
+  
+    Lösung: Gehen Sie zum Stammverzeichnis Ihres Geräts und löschen Sie den Ordner `~/.mintlify`. Führen Sie dann erneut `mint dev` aus.
+  </Accordion>
+</AccordionGroup>
+
+Neugierig, was sich in der neuesten CLI-Version geändert hat? Schauen Sie sich das [CLI-Änderungsprotokoll](https://www.npmjs.com/package/mintlify?activeTab=versions) an.

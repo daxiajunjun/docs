@@ -67,6 +67,64 @@
             ]
           }
         ]
+      },
+      {
+        "language": "de",
+        "groups": [
+          {
+            "group": "入门",
+            "pages": [
+              "de/index",
+              "de/quickstart",
+              "de/development"
+            ]
+          },
+          {
+            "group": "自定义",
+            "pages": [
+              "de/essentials/settings",
+              "de/essentials/navigation"
+            ]
+          },
+          {
+            "group": "内容写作",
+            "pages": [
+              "de/essentials/markdown",
+              "de/essentials/code",
+              "de/essentials/images",
+              "de/essentials/reusable-snippets"
+            ]
+          }
+        ]
+      },
+      {
+        "language": "ja",
+        "groups": [
+          {
+            "group": "入门",
+            "pages": [
+              "ja/index",
+              "ja/quickstart",
+              "ja/development"
+            ]
+          },
+          {
+            "group": "自定义",
+            "pages": [
+              "ja/essentials/settings",
+              "ja/essentials/navigation"  
+            ]
+          },
+          {
+            "group": "内容写作",
+            "pages": [
+              "ja/essentials/markdown",
+              "ja/essentials/code",
+              "ja/essentials/images",
+              "ja/essentials/reusable-snippets"
+            ]
+          }
+        ]
       }
     ],
     "global": {
