@@ -13,8 +13,6 @@ api_key = os.getenv("OPENAI_API_KEY")
 azure_openai_base_url = 'https://azureopenai-east-us.openai.azure.com'
 azure_openai_api_version = '2025-04-01-preview'
 
-print(api_key)
-
 if not api_key:
     raise ValueError("一个或多个环境变量未设置 (OPENAI_API_KEY)")
 
@@ -32,6 +30,7 @@ LANGUAGE_NAMES = {
     'de': '德语', 'ja': '日语', 'es': '西班牙语',
     # 可根据需要添加更多语言
 }
+
 
 # --- 脚本逻辑 ---
 
@@ -189,7 +188,6 @@ def main():
         return
         
     print(f"识别到 {len(tasks)} 个翻译任务...")
-    print(api_key, azure_openai_base_url, azure_openai_api_version)
     
     for task in tasks:
         source_file = task['source']
