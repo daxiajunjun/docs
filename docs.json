@@ -9,12 +9,12 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "languages": [
+    "tabs": [
       {
-        "language": "en",
-        "tabs": [
+        "tab": "Guides",
+        "languages": [
           {
-            "tab": "Guides",
+            "language": "en",
             "groups": [
               {
                 "group": "Getting started",
@@ -41,13 +41,9 @@
                 ]
               }
             ]
-          }
-        ]
-      },
-      {
-        "language": "zh-CN",
-        "tabs": [
+          },
           {
+            "language": "zh-CN",
             "tab": "指南",
             "groups": [
               {
