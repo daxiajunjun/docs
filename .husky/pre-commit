@@ -1,9 +1,0 @@
-
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-echo "Husky pre-push: 正在运行文档翻译脚本并自动暂存变更..."
-python scripts/translate_docs.py
-echo "脚本执行完毕。"
-
-exit 0
