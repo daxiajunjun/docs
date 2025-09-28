@@ -131,6 +131,7 @@ def translate_and_update(original_path, old_content, new_content, target_languag
     - 不要重新翻译整个文档，只更新发生变化的部分。
     - 如果英文原文中有些部分没有变化，{language_name}翻译中对应的部分也应该保持不变。
     - 最终，你只需要输出更新后的、完整的{language_name}文档内容，不要包含任何额外的解释或标记。
+    - 保持markdown格式，不要改变markdown格式。
     """
     user_prompt = f"""
     请根据以下英文文档的变更，更新相应的{language_name}翻译。
